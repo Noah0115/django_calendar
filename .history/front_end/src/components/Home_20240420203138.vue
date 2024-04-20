@@ -145,7 +145,7 @@ export default {
     },
 
     filteredSubItems(children) {
-      // return children.filter(subItem => this.checkRole(subItem.role));
+      
       return children;
     },
   },

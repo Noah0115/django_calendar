@@ -122,8 +122,14 @@ export default {
   },
   methods: {
     getUserId() {
+      /* console.log(this.$store.getters.getUserRole);
+          console.log(this.$store.getters.getUserId); */
+      // this.userid = sessionStorage.getItem('userid')
+      // this.role = parseInt(sessionStorage.getItem('role'))
       this.userid = this.$store.getters.getUserId;
+
       this.role = this.$store.getters.getUserRole;
+      // console.log(this.userid)
     },
     async logout() {
       this.$notify.closeAll();

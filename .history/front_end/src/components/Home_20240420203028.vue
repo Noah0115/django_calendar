@@ -64,99 +64,110 @@ export default {
     return {
       menulist: [
         {
-          authName: "电子日历",
-          id: "145",
-          role: [1, 0],
-          children: [
-            {
-              authName: "日历查看",
-              path: "welcome",
-            },
+          authName: '电子日历',
+          id: '145',
+          role: [1,0],
+          children: [{
+            authName: '日历查看',
+            path: 'welcome',
+          },
           ],
         },
         {
-          authName: "用户管理",
+          authName: '用户管理',
           role: [1],
-          id: "125",
-          children: [
-            {
-              authName: "用户列表",
-              path: "user",
-            },
+          id: '125',
+          children: [{
+            authName: '用户列表',
+            path: 'user',
+          },
           ],
         },
         {
-          authName: "事件管理",
+          authName: '事件管理',
           role: [1],
-          id: "103",
-          children: [
-            {
-              authName: "事件列表",
-              path: "even",
-            },
+          id: '103',
+          children: [{
+            authName: '事件列表',
+            path: 'even',
+          },
           ],
         },
+
       ],
       iconObj: {
-        125: "el-icon-user-solid",
-        103: "el-icon-s-promotion",
-        101: "iconfont icon-shangpin",
-        102: "el-icon-s-comment",
-        145: "el-icon-s-claim",
-        110: "el-icon-s-tools",
+        '125': 'el-icon-user-solid',
+        '103': 'el-icon-s-promotion',
+        '101': 'iconfont icon-shangpin',
+        '102': 'el-icon-s-comment',
+        '145': 'el-icon-s-claim',
+        '110': 'el-icon-s-tools'
       },
       isCollapse: false,
       //被激活的链接地址
-      activePath: "",
+      activePath: '',
       userid: NaN,
-      userInfo: {},
-      username: "",
-      role: 0,
-    };
+      userInfo: {
+      },
+      username: '',
+      role: 0
+    }
   },
   created() {
-    this.getUserId();
+    this.getUserId()
     this.filteredMenuList;
     this.filteredSubList;
-    this.activePath = window.sessionStorage.getItem("activePath");
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     getUserId() {
-      this.userid = this.$store.getters.getUserId;
-      this.role = this.$store.getters.getUserRole;
+      /* console.log(this.$store.getters.getUserRole);
+          console.log(this.$store.getters.getUserId); */
+      // this.userid = sessionStorage.getItem('userid')
+      // this.role = parseInt(sessionStorage.getItem('role'))
+      this.userid = this.$store.getters.getUserId
+
+      this.role = this.$store.getters.getUserRole
+      // console.log(this.userid)
     },
     async logout() {
+      // const { data: res } = await this.$http.post("/logout", {
+      //   user_id: this.userid
+      // });
       this.$notify.closeAll();
       this.$message.success("成功退出登录");
       window.sessionStorage.clear();
-      this.$store.commit("setUserRole", "");
-      this.$store.commit("setUserId", "");
+      this.$store.commit("setUserRole",res.role)
+       this.$store.commit("setUserId",res.user_id)
       this.$router.push("/login");
     },
     /* 点击按钮切换折叠和展开 */
     toggleCollapse() {
-      this.isCollapse = !this.isCollapse;
+      this.isCollapse = !this.isCollapse
     },
     //保存链接的激活状态
     saveNavState(activePath) {
       this.$notify.closeAll();
-      window.sessionStorage.setItem("activePath", activePath);
-      this.activePath = activePath;
+      window.sessionStorage.setItem('activePath', activePath)
+      this.activePath = activePath
     },
 
     filteredSubItems(children) {
       // return children.filter(subItem => this.checkRole(subItem.role));
-      return children;
+      return children
     },
+
   },
 
-  mounted() {},
+  mounted() {
+  },
   computed: {
     filteredMenuList() {
-      return this.menulist.filter((item) => item.role.includes(this.role));
+      return this.menulist.filter(item =>item.role.includes(this.role));   
     },
+
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

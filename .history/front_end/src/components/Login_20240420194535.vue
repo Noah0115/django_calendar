@@ -160,17 +160,14 @@ export default {
         const { data: res } = await this.$http.post("/login", this.loginFORM);
         // console.log(res)
         if (res.code == 200) {
-          console.log(res);
-          
+          log
           this.$message.success(res.msg);
           // console.log(typeof res.role)
           //1.将登录成功后的token，保存到客户端的sessionStorage中
           //  1.1 项目中除了登录之外的API接口，必须登录成功后才能访问
           //  1.2 token只应在当前网站打开期间生效，所以将token保存在 sessionStorage中
-          
-          this.$store.commit("setUserRole",res.role)
-          this.$store.commit("setUserId",res.user_id)
-          
+          window.sessionStorage.setItem("userid", res.user_id);
+          window.sessionStorage.setItem("role", res.role);
           window.sessionStorage.setItem("activePath", "/welcome");
           // this.$store.commit('setUserRole', res.data[0].role);
           /* console.log(this.$store.state.userRole) */

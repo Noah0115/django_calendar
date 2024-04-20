@@ -167,9 +167,10 @@ export default {
           //1.将登录成功后的token，保存到客户端的sessionStorage中
           //  1.1 项目中除了登录之外的API接口，必须登录成功后才能访问
           //  1.2 token只应在当前网站打开期间生效，所以将token保存在 sessionStorage中
-          
+          // window.sessionStorage.setItem("userid", res.user_id);
+          // window.sessionStorage.setItem("role", res.role);
           this.$store.commit("setUserRole",res.role)
-          this.$store.commit("setUserId",res.user_id)
+          console.log(this.$store.getters.getUserRole);
           
           window.sessionStorage.setItem("activePath", "/welcome");
           // this.$store.commit('setUserRole', res.data[0].role);

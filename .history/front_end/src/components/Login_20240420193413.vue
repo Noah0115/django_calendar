@@ -81,6 +81,7 @@ export default {
       }
       cb(new Error("请输入合法邮箱"));
     };
+    
     return {
       //这是登录表单数据绑定对象
       loginFORM: {
@@ -92,27 +93,24 @@ export default {
         //用户名校验
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
-          {
-            min: 1,
-            max: 10,
-            message: "长度在 1 到 10 个字符",
-            trigger: "blur",
-          },
+          { min: 1, max: 10, message: "长度在 1 到 10 个字符", trigger: "blur" },
         ],
 
         //密码校验
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 15,
-            message: "长度在 6 到 15 个字符",
-            trigger: "blur",
-          },
+          { min: 6, max: 15, message: "长度在 6 到 15 个字符", trigger: "blur" },
         ],
       },
       addDialogVisible: false,
-      value: "",
+      options: [{
+        value: '0',
+        label: '患者'
+      }, {
+        value: '1',
+        label: '医生'
+      }],
+      value: '',
       addForm: {
         username: "",
         password: "",
@@ -143,7 +141,8 @@ export default {
             validator: checkEmail,
             trigger: "blur",
           },
-        ],
+        ]
+
       },
     };
   },
@@ -155,32 +154,28 @@ export default {
     },
     //登录
     login() {
-      this.$refs.loginFORMRef.validate(async (valid) => {
+      this.$refs.loginFORMRef.validate(async valid => {
         if (!valid) return;
         const { data: res } = await this.$http.post("/login", this.loginFORM);
         // console.log(res)
         if (res.code == 200) {
-          console.log(res);
-          
           this.$message.success(res.msg);
           // console.log(typeof res.role)
           //1.将登录成功后的token，保存到客户端的sessionStorage中
           //  1.1 项目中除了登录之外的API接口，必须登录成功后才能访问
           //  1.2 token只应在当前网站打开期间生效，所以将token保存在 sessionStorage中
-          
-          this.$store.commit("setUserRole",res.role)
-          this.$store.commit("setUserId",res.user_id)
-          
-          window.sessionStorage.setItem("activePath", "/welcome");
+          window.sessionStorage.setItem("userid", res.user_id);
+          window.sessionStorage.setItem("role", res.role);
+          window.sessionStorage.setItem("activePath", '/welcome');
           // this.$store.commit('setUserRole', res.data[0].role);
           /* console.log(this.$store.state.userRole) */
           //2 通过编程式导航跳转到后台主页，路由地址/Home
-          this.$router.push("/home");
-        } else if (res.code == 500) {
-          console.log(res);
+          this.$router.push("/home")
+        } else if(res.code == 500){
+          console.log(res)
           return this.$message.error(res.msg);
         }
-      });
+      })
     },
     addDialogClosed() {
       this.$refs.addFormRef.resetFields();
@@ -193,7 +188,7 @@ export default {
         // console.log(this.addForm)
 
         //可以发起添加用户的网络请求
-        const { data: res } = await this.$http.post("/register", this.addForm);
+        const { data: res } = await this.$http.post("/register", this.addForm)
         // console.log('res', res)
         if (res.code !== 200) {
           return this.$message.error(res.msg);
@@ -202,7 +197,7 @@ export default {
         this.addDialogVisible = false;
       });
     },
-  },
+  }
 };
 </script>
 

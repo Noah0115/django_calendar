@@ -66,7 +66,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_calendar',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': '123qwezxc',
         'HOST': '127.0.0.1',
         'PORT': 3306
     }

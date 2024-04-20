@@ -18,7 +18,7 @@ import './theme/index.css'
 import './assets/css/global.css'
 import './assets/fonts/iconfont.css'
 import VueQuillEditor from 'vue-quill-editor'
-import store from './store/index'
+import store from './store'
 Vue.use(VueQuillEditor)
 //导入富文本编辑器对应的样式
 import 'quill/dist/quill.core.css' // import styles
@@ -32,8 +32,8 @@ Vue.use(Element)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
-axios.defaults.baseURL = 'http://127.0.0.1:7000'
-
+//axios.defaults.baseURL = 'http://127.0.0.1:8000'
+// axios.defaults.baseURL = 'http://82.156.147.153:8025'
 axios.defaults.headers['Content-Type'] = 'application/json'
 Vue.prototype.$http = axios
 Vue.component("App", App);

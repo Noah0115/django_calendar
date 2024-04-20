@@ -122,8 +122,11 @@ export default {
   },
   methods: {
     getUserId() {
+    
       this.userid = this.$store.getters.getUserId;
+
       this.role = this.$store.getters.getUserRole;
+      // console.log(this.userid)
     },
     async logout() {
       this.$notify.closeAll();

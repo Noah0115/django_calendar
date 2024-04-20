@@ -18,7 +18,7 @@ import './theme/index.css'
 import './assets/css/global.css'
 import './assets/fonts/iconfont.css'
 import VueQuillEditor from 'vue-quill-editor'
-import store from './store/index'
+import store from './store/store'
 Vue.use(VueQuillEditor)
 //导入富文本编辑器对应的样式
 import 'quill/dist/quill.core.css' // import styles

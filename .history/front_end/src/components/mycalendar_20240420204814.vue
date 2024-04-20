@@ -298,7 +298,7 @@ export default {
 
   },
   created() {
-    
+    this.userid = this.$store.getters.getUserId;
     this.$notify.closeAll();
     // this.getlist();
 
@@ -307,7 +307,6 @@ export default {
   methods: {
     //启动测试
     async getlist() {
-      this.userid = this.$store.getters.getUserId;
        //先拿id
       const { data: res } = await this.$http.post("/get_event", {
         user_id: this.userid
@@ -384,6 +383,7 @@ export default {
         detail: info.event._def.extendedProps.detail,
       };
       this.saveEvent();
+      // console.log(this.form)
     },
     // 日程缩放事件
     eventResize(info) {
@@ -423,6 +423,8 @@ export default {
         //新增
         // this.form.id = res.id;
         const { data: res } = await this.$http.post("/add_event", this.form);
+        // console.log(res)
+        // this.calendarEvents.push(this.form);
         if (res.code !== 200) {
           return this.$message.error(res.msg)
         }
@@ -434,6 +436,7 @@ export default {
           return this.$message.error(res.msg)
         }
         this.$message.success(res.msg)
+
       }
       this.dialogFormVisible = false;
       this.getlist()
@@ -445,6 +448,8 @@ export default {
 
       let calendarApi = this.$refs.myCalendar.getApi();
       let Events = calendarApi.getEvents()
+      // let Events = info
+      // this.handleEvents()
       let hasRecentEvent = false; // 定义一个变量，表示是否有近期活动
       let time = this.$moment().format('YYYY-MM-DDTHH:mm:ss');
       // console.log('所有事件', Events);

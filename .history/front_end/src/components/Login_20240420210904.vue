@@ -170,7 +170,7 @@ export default {
           
           this.$store.commit("setUserRole",res.role)
           this.$store.commit("setUserId",res.user_id)
-          window.sessionStorage.setItem("token",res.token);
+          window.sessionStorage.setItem("token", "/welcome");
           window.sessionStorage.setItem("activePath", "/welcome");
           // this.$store.commit('setUserRole', res.data[0].role);
           /* console.log(this.$store.state.userRole) */

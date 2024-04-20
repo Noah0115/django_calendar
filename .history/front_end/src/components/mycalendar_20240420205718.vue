@@ -307,7 +307,6 @@ export default {
   methods: {
     //启动测试
     async getlist() {
-      this.userid = this.$store.getters.getUserId;
        //先拿id
       const { data: res } = await this.$http.post("/get_event", {
         user_id: this.userid

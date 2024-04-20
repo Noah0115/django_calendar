@@ -28,9 +28,9 @@ export default new Vuex.Store({
     },
   },
   // 持久化插件
-  plugins: [
+  /* plugins: [
     createPersistedState({
       key: "your-app-storage-key", // 设置一个存储键名
     }),
-  ],
+  ], */
 });

@@ -1,12 +1,12 @@
 import json
-
+from datetime import datetime, timedelta
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password,check_password
 from app.forms import UserRegistrationForm
 from app.utils.message import *
 from app.models import *
 from django.middleware.csrf import get_token
-
+import jwt
 def csrf_token(request):
     csrfToken = get_token(request)
     return JsonResponse({'csrfToken': csrfToken})
@@ -43,9 +43,13 @@ def login(request):
                 request.session['user_id'] = user.id
                 # 确保会话数据被保存
                 request.session.modified = True
+                # 生成 JWT token
+                token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(days=7)}, 'SECRET_KEY',
+                                   algorithm='HS256')
                 data = {
                     'user_id': user.id,
-                    'role': user.role
+                    'role': user.role,
+                    'token': token
                 }
                 return JsonResponse(success_msg(data))
         else:

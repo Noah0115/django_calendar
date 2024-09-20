@@ -1,5 +1,8 @@
 # 环境配置及功能模块说明
 
+## node_modules网盘下载
+https://wwd.lanzout.com/iVX0t1p7fnif
+
 ## 项目环境
 
 Python3.11.6
